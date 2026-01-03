@@ -35,8 +35,8 @@ WORKDIR /app
 RUN apk add --no-cache dumb-init
 
 # Create non-root user
-RUN addgroup -g 1001 -S nodejs && \
-    adduser -S nodejs -u 1001
+RUN addgroup -g 1001 -S nodejs || true
+RUN adduser -S nodejs -u 1001 -G nodejs || true
 
 # Copy built frontend
 COPY --from=frontend-builder /app/dist ./dist
